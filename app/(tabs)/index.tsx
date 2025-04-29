@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import { Image, StyleSheet, Platform } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
@@ -17,7 +18,9 @@ export default function HomeScreen() {
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">
+          {Constants.expoConfig?.extra?.message}
+        </ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>

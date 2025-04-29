@@ -1,50 +1,29 @@
-# Welcome to your Expo app 👋
+# Practice expo app config
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+expo app.json を動的に生成するためのリポジトリ
 
-## Get started
+## 事前準備
 
-1. Install dependencies
+- pnpm をインストールしておくこと
+- pnpm install
+- expo.dev のプロジェクトで、環境変数に `APP_NAME=app-a` を設定しておくこと
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Build
 
 ```bash
-npm run reset-project
+pnpm run app-a eas build --platform android --profile development
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## dev
 
-## Learn more
+毎回このコマンドを打つのは少し面倒な気もするので、デフォルトプロジェクトのようなものがあれば、`start`を`cross-env APP_NAME=app-a expo start`とかに設定しておくとよさそう。
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+pnpm run app-a pnpm run start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 方針
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `/app-config/xx.cjs` にアプリごとの設定を記述できるように。
+    - app.config.ts から require(`./app-config/${process.env.APP_NAME}.cjs`) で読み込む。
+    - app.config.ts から読み込むjsはcommon jsである必要があるため、.cjsを使う。
