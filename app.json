@@ -1,6 +1,7 @@
 {
   "expo": {
     "version": "1.0.0",
+    "owner": "moeyashi",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
